@@ -1,9 +1,10 @@
 # coding: utf-8
+# 2022.6.1
+# xy review
 import sys, os
 sys.path.append(os.pardir)
-
 import numpy as np
-from dataset.mnist import load_mnist
+from dataset_all.mnist import load_mnist
 from two_layer_net import TwoLayerNet
 
 # 读入数据
@@ -11,7 +12,7 @@ from two_layer_net import TwoLayerNet
 
 network = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)
 
-iters_num = 10000
+iters_num = 5000
 train_size = x_train.shape[0]
 batch_size = 100
 learning_rate = 0.1
@@ -27,8 +28,9 @@ for i in range(iters_num):
     x_batch = x_train[batch_mask]
     t_batch = t_train[batch_mask]
     
-    # 梯度
+    # 通过数值微分法求梯度
     #grad = network.numerical_gradient(x_batch, t_batch)
+    # 通过误差反向传播法求梯度
     grad = network.gradient(x_batch, t_batch)
     
     # 更新
@@ -43,4 +45,4 @@ for i in range(iters_num):
         test_acc = network.accuracy(x_test, t_test)
         train_acc_list.append(train_acc)
         test_acc_list.append(test_acc)
-        print(train_acc, test_acc)
+        print(i, iter_per_epoch, train_acc, test_acc)

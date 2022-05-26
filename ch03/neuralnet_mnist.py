@@ -1,10 +1,12 @@
 # coding: utf-8
+# 2022.4.6
+# xy review
 import sys, os
 sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
 import numpy as np
 import pickle
-from dataset.mnist import load_mnist
-from common.functions import sigmoid, softmax
+from dataset_all.mnist import load_mnist
+from common_all.functions import sigmoid, softmax
 
 
 def get_data():
@@ -13,6 +15,7 @@ def get_data():
 
 
 def init_network():
+    # 直接加载已经学习到的参数
     with open("sample_weight.pkl", 'rb') as f:
         network = pickle.load(f)
     return network

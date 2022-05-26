@@ -1,15 +1,17 @@
 # coding: utf-8
+# 2022.5.30
+# xy review
 import sys, os
 sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
 import numpy as np
-from common.layers import *
-from common.gradient import numerical_gradient
+from common_all.layers import *
+from common_all.gradient import numerical_gradient
 from collections import OrderedDict
 
 
 class TwoLayerNet:
 
-    def __init__(self, input_size, hidden_size, output_size, weight_init_std = 0.01):
+    def __init__(self, input_size, hidden_size, output_size, weight_init_std=0.01):
         # 初始化权重
         self.params = {}
         self.params['W1'] = weight_init_std * np.random.randn(input_size, hidden_size)
@@ -26,7 +28,7 @@ class TwoLayerNet:
         self.lastLayer = SoftmaxWithLoss()
         
     def predict(self, x):
-        for layer in self.layers.values():
+        for layer in self.layers.values():  # layers.values是什么？
             x = layer.forward(x)
         
         return x
@@ -39,8 +41,8 @@ class TwoLayerNet:
     def accuracy(self, x, t):
         y = self.predict(x)
         y = np.argmax(y, axis=1)
-        if t.ndim != 1 : t = np.argmax(t, axis=1)
-        
+        if t.ndim != 1:
+            t = np.argmax(t, axis=1)
         accuracy = np.sum(y == t) / float(x.shape[0])
         return accuracy
         
