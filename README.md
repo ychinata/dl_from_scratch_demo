@@ -1,5 +1,7 @@
 # 深度学习入门
 
+基于Python的理论与实现 (Deep Learning From Scratch) [日]斋藤康毅 著. 陆宇杰 译
+
 
 
 ## 文件结构

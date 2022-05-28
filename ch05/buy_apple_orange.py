@@ -1,6 +1,6 @@
 # coding: utf-8
 # 2022.4.13
-# hxy review
+# xy review
 from layer_naive import *
 
 apple = 100
