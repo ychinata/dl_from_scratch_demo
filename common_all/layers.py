@@ -37,6 +37,7 @@ class Sigmoid:
         return dx
 
 
+# 中间仿射层
 class Affine:
     def __init__(self, W, b):
         self.W = W
@@ -67,23 +68,24 @@ class Affine:
         return dx
 
 
+# 输出层
 class SoftmaxWithLoss:
     def __init__(self):
-        self.loss = None
-        self.y = None # softmax的输出
-        self.t = None # 监督数据
+        self.loss = None  # 损失
+        self.y = None  # softmax的输出
+        self.t = None  # 监督数据
 
     def forward(self, x, t):
         self.t = t
         self.y = softmax(x)
-        self.loss = cross_entropy_error(self.y, self.t)
+        self.loss = cross_entropy_error(self.y, self.t)  # 交叉熵误差
         
         return self.loss
 
     def backward(self, dout=1):
         batch_size = self.t.shape[0]
-        if self.t.size == self.y.size: # 监督数据是one-hot-vector的情况
-            dx = (self.y - self.t) / batch_size
+        if self.t.size == self.y.size:  # 监督数据是one-hot-vector的情况
+            dx = (self.y - self.t) / batch_size  # 除以批的大小，传递给前面层的是单个数据的误差
         else:
             dx = self.y.copy()
             dx[np.arange(batch_size), self.t] -= 1
