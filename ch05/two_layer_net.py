@@ -5,7 +5,8 @@ import numpy as np
 from common_all.layers import *
 from common_all.gradient import numerical_gradient
 from collections import OrderedDict
-
+# 2022.5.30
+# xy review
 
 class TwoLayerNet:
 
@@ -26,7 +27,7 @@ class TwoLayerNet:
         self.lastLayer = SoftmaxWithLoss()
         
     def predict(self, x):
-        for layer in self.layers.values():
+        for layer in self.layers.values():  # layers.values是什么？
             x = layer.forward(x)
         
         return x
@@ -39,8 +40,8 @@ class TwoLayerNet:
     def accuracy(self, x, t):
         y = self.predict(x)
         y = np.argmax(y, axis=1)
-        if t.ndim != 1 : t = np.argmax(t, axis=1)
-        
+        if t.ndim != 1:
+            t = np.argmax(t, axis=1)
         accuracy = np.sum(y == t) / float(x.shape[0])
         return accuracy
         
