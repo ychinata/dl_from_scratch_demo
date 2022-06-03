@@ -1,6 +1,7 @@
 # coding: utf-8
 import numpy as np
 
+
 class SGD:
 
     """随机梯度下降法（Stochastic Gradient Descent）"""
