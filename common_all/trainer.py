@@ -2,14 +2,15 @@
 import sys, os
 sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
 import numpy as np
-from common.optimizer import *
+from common_all.optimizer import *
+
 
 class Trainer:
     """进行神经网络的训练的类
     """
     def __init__(self, network, x_train, t_train, x_test, t_test,
                  epochs=20, mini_batch_size=100,
-                 optimizer='SGD', optimizer_param={'lr':0.01}, 
+                 optimizer='SGD', optimizer_param={'lr': 0.01},
                  evaluate_sample_num_per_epoch=None, verbose=True):
         self.network = network
         self.verbose = verbose
@@ -22,8 +23,8 @@ class Trainer:
         self.evaluate_sample_num_per_epoch = evaluate_sample_num_per_epoch
 
         # optimzer
-        optimizer_class_dict = {'sgd':SGD, 'momentum':Momentum, 'nesterov':Nesterov,
-                                'adagrad':AdaGrad, 'rmsprpo':RMSprop, 'adam':Adam}
+        optimizer_class_dict = {'sgd': SGD, 'momentum': Momentum, 'nesterov': Nesterov,
+                                'adagrad': AdaGrad, 'rmsprpo': RMSprop, 'adam': Adam}
         self.optimizer = optimizer_class_dict[optimizer.lower()](**optimizer_param)
         
         self.train_size = x_train.shape[0]

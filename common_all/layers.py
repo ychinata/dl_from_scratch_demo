@@ -197,6 +197,7 @@ class BatchNormalization:
         return dx
 
 
+# 卷积层
 class Convolution:
     def __init__(self, W, b, stride=1, pad=0):
         self.W = W
@@ -205,7 +206,7 @@ class Convolution:
         self.pad = pad
         
         # 中间数据（backward时使用）
-        self.x = None   
+        self.x = None
         self.col = None
         self.col_W = None
         
@@ -219,10 +220,9 @@ class Convolution:
         out_h = 1 + int((H + 2*self.pad - FH) / self.stride)
         out_w = 1 + int((W + 2*self.pad - FW) / self.stride)
 
-        col = im2col(x, FH, FW, self.stride, self.pad)
-        col_W = self.W.reshape(FN, -1).T
-
-        out = np.dot(col, col_W) + self.b
+        col = im2col(x, FH, FW, self.stride, self.pad)  # 输入数据的展开
+        col_W = self.W.reshape(FN, -1).T                # 滤波器的展开，展开为FN列。参数指定为-1，reshape会自动计算出元素个数
+        out = np.dot(col, col_W) + self.b  # 展开之后复用矩阵相乘进行高效计算
         out = out.reshape(N, out_h, out_w, -1).transpose(0, 3, 1, 2)
 
         self.x = x
@@ -233,7 +233,7 @@ class Convolution:
 
     def backward(self, dout):
         FN, C, FH, FW = self.W.shape
-        dout = dout.transpose(0,2,3,1).reshape(-1, FN)
+        dout = dout.transpose(0, 2, 3, 1).reshape(-1, FN)
 
         self.db = np.sum(dout, axis=0)
         self.dW = np.dot(self.col.T, dout)
@@ -245,6 +245,7 @@ class Convolution:
         return dx
 
 
+# 池化层
 class Pooling:
     def __init__(self, pool_h, pool_w, stride=1, pad=0):
         self.pool_h = pool_h
@@ -259,12 +260,13 @@ class Pooling:
         N, C, H, W = x.shape
         out_h = int(1 + (H - self.pool_h) / self.stride)
         out_w = int(1 + (W - self.pool_w) / self.stride)
-
+        # 第1步展开输入数据
         col = im2col(x, self.pool_h, self.pool_w, self.stride, self.pad)
         col = col.reshape(-1, self.pool_h*self.pool_w)
-
+        # 第2步求各行最大值
         arg_max = np.argmax(col, axis=1)
         out = np.max(col, axis=1)
+        # 第3步转换为合适的输出大小
         out = out.reshape(N, out_h, out_w, C).transpose(0, 3, 1, 2)
 
         self.x = x
