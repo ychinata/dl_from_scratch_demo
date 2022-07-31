@@ -1,4 +1,7 @@
 # coding: utf-8
+# 2022.7.31
+# xy review
+
 import sys, os
 sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
 import numpy as np
@@ -22,8 +25,8 @@ def filter_show(filters, nx=4, show_num=16):
         ax.imshow(filters[i, 0], cmap=plt.cm.gray_r, interpolation='nearest')
 
 
-network = SimpleConvNet(input_dim=(1,28,28), 
-                        conv_param = {'filter_num':30, 'filter_size':5, 'pad':0, 'stride':1},
+network = SimpleConvNet(input_dim=(1, 28, 28),
+                        conv_param={'filter_num': 30, 'filter_size': 5, 'pad': 0, 'stride': 1},
                         hidden_size=100, output_size=10, weight_init_std=0.01)
 
 # 学习后的权重
@@ -31,7 +34,7 @@ network.load_params("params.pkl")
 
 filter_show(network.params['W1'], 16)
 
-img = imread('../dataset/lena_gray.png')
+img = imread('../dataset_all/lena_gray.png')
 img = img.reshape(1, 1, *img.shape)
 
 fig = plt.figure()

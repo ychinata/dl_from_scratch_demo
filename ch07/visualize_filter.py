@@ -1,7 +1,12 @@
 # coding: utf-8
+# 2022.7.30
+# xy review
 import numpy as np
 import matplotlib.pyplot as plt
 from simple_convnet import SimpleConvNet
+
+# fig.7-24
+
 
 def filter_show(filters, nx=8, margin=3, scale=10):
     """

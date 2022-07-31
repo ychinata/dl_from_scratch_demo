@@ -1,9 +1,13 @@
 # coding: utf-8
+# 误差反向传播法的梯度确认，在5.7.3章
+# 2022.7.31
+# xy review
+
 import numpy as np
 from simple_convnet import SimpleConvNet
 
 network = SimpleConvNet(input_dim=(1,10, 10), 
-                        conv_param = {'filter_num':10, 'filter_size':3, 'pad':0, 'stride':1},
+                        conv_param={'filter_num': 10, 'filter_size': 3, 'pad': 0, 'stride': 1},
                         hidden_size=10, output_size=10, weight_init_std=0.01)
 
 X = np.random.rand(100).reshape((1, 1, 10, 10))
