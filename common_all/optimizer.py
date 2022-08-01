@@ -1,7 +1,9 @@
 # coding: utf-8
 import numpy as np
+# 2022.8.4
+# xy review
 
-
+# 6.1.2
 class SGD:
 
     """随机梯度下降法（Stochastic Gradient Descent）"""
@@ -14,6 +16,7 @@ class SGD:
             params[key] -= self.lr * grads[key] 
 
 
+# 6.1.4
 class Momentum:
 
     """Momentum SGD"""
@@ -56,6 +59,7 @@ class Nesterov:
             params[key] -= (1 + self.momentum) * self.lr * grads[key]
 
 
+# 6.1.5
 class AdaGrad:
 
     """AdaGrad"""
@@ -96,6 +100,7 @@ class RMSprop:
             params[key] -= self.lr * grads[key] / (np.sqrt(self.h[key]) + 1e-7)
 
 
+# 6.1.6
 class Adam:
 
     """Adam (http://arxiv.org/abs/1412.6980v8)"""

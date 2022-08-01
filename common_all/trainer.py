@@ -1,4 +1,7 @@
 # coding: utf-8
+# 2022.8.5
+# xy review
+# 6.4.3 Dropout中首次实现
 import sys, os
 sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
 import numpy as np

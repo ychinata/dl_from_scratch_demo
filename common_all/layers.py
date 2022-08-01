@@ -93,7 +93,7 @@ class SoftmaxWithLoss:
         
         return dx
 
-
+# 6.4.3
 class Dropout:
     """
     http://arxiv.org/abs/1207.0580
@@ -113,6 +113,7 @@ class Dropout:
         return dout * self.mask
 
 
+# 6.3
 class BatchNormalization:
     """
     http://arxiv.org/abs/1502.03167
