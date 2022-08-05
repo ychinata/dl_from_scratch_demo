@@ -1,5 +1,8 @@
 # coding: utf-8
+# 2022.8.4
+# xy review
 import numpy as np
+
 
 def _numerical_gradient_1d(f, x):
     h = 1e-4 # 0.0001

@@ -1,14 +1,16 @@
 # coding: utf-8
+# 2022.8.4
+# xy review
 import os
 import sys
 
 sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
 import numpy as np
 import matplotlib.pyplot as plt
-from dataset.mnist import load_mnist
-from common.util import smooth_curve
-from common.multi_layer_net import MultiLayerNet
-from common.optimizer import SGD
+from dataset_all.mnist import load_mnist
+from common_all.util import smooth_curve
+from common_all.multi_layer_net import MultiLayerNet
+from common_all.optimizer import SGD
 
 
 # 0:读入MNIST数据==========

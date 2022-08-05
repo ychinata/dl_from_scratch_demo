@@ -1,6 +1,7 @@
 # coding: utf-8
 import numpy as np
-
+# 2022.8.4
+# xy review
 
 def smooth_curve(x):
     """用于使损失函数的图形变圆滑

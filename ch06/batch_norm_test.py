@@ -1,11 +1,14 @@
 # coding: utf-8
+# 2022.8.5
+# xy review
+
 import sys, os
 sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
 import numpy as np
 import matplotlib.pyplot as plt
-from dataset.mnist import load_mnist
-from common.multi_layer_net_extend import MultiLayerNetExtend
-from common.optimizer import SGD, Adam
+from dataset_all.mnist import load_mnist
+from common_all.multi_layer_net_extend import MultiLayerNetExtend
+from common_all.optimizer import SGD, Adam
 
 (x_train, t_train), (x_test, t_test) = load_mnist(normalize=True)
 
@@ -20,8 +23,10 @@ learning_rate = 0.01
 
 
 def __train(weight_init_std):
+    # 正规化
     bn_network = MultiLayerNetExtend(input_size=784, hidden_size_list=[100, 100, 100, 100, 100], output_size=10, 
                                     weight_init_std=weight_init_std, use_batchnorm=True)
+    # 无正规化
     network = MultiLayerNetExtend(input_size=784, hidden_size_list=[100, 100, 100, 100, 100], output_size=10,
                                 weight_init_std=weight_init_std)
     optimizer = SGD(lr=learning_rate)

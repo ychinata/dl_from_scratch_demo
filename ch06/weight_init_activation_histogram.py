@@ -1,4 +1,6 @@
 # coding: utf-8
+# 2022.8.4
+# xy review
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -26,17 +28,16 @@ for i in range(hidden_layer_size):
         x = activations[i-1]
 
     # 改变初始值进行实验！
-    w = np.random.randn(node_num, node_num) * 1
-    # w = np.random.randn(node_num, node_num) * 0.01
+    # w = np.random.randn(node_num, node_num) * 1
+    w = np.random.randn(node_num, node_num) * 0.01
+    # Xavier 初始值
     # w = np.random.randn(node_num, node_num) * np.sqrt(1.0 / node_num)
+    # He初始值
     # w = np.random.randn(node_num, node_num) * np.sqrt(2.0 / node_num)
 
-
     a = np.dot(x, w)
-
-
     # 将激活函数的种类也改变，来进行实验！
-    z = sigmoid(a)
+    z = sigmoid(a) # 默认
     # z = ReLU(a)
     # z = tanh(a)
 
@@ -48,6 +49,7 @@ for i, a in activations.items():
     plt.title(str(i+1) + "-layer")
     if i != 0: plt.yticks([], [])
     # plt.xlim(0.1, 1)
-    # plt.ylim(0, 7000)
+    plt.ylim(0, 7000)
     plt.hist(a.flatten(), 30, range=(0,1))
+
 plt.show()

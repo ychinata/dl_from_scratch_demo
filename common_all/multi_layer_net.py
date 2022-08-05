@@ -1,10 +1,12 @@
 # coding: utf-8
+# 2022.8.4
+# xy review
 import sys, os
 sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
 import numpy as np
 from collections import OrderedDict
-from common.layers import *
-from common.gradient import numerical_gradient
+from common_all.layers import *
+from common_all.gradient import numerical_gradient
 
 
 class MultiLayerNet:

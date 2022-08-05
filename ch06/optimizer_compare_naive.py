@@ -1,18 +1,23 @@
 # coding: utf-8
+# 2022.8.4
+# xy review
 import sys, os
 sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
 import numpy as np
 import matplotlib.pyplot as plt
 from collections import OrderedDict
-from common.optimizer import *
+from common_all.optimizer import *
 
 
+# 公式(6.2)
 def f(x, y):
     return x**2 / 20.0 + y**2
 
 
+# 公式(6.2)的偏导数(df/dx, df/dy)
 def df(x, y):
     return x / 10.0, 2.0*y
+
 
 init_pos = (-7.0, 2.0)
 params = {}
@@ -41,7 +46,6 @@ for key in optimizers:
         
         grads['x'], grads['y'] = df(params['x'], params['y'])
         optimizer.update(params, grads)
-    
 
     x = np.arange(-10, 10, 0.01)
     y = np.arange(-5, 5, 0.01)
@@ -61,8 +65,8 @@ for key in optimizers:
     plt.ylim(-10, 10)
     plt.xlim(-10, 10)
     plt.plot(0, 0, '+')
-    #colorbar()
-    #spring()
+    # colorbar()
+    # spring()
     plt.title(key)
     plt.xlabel("x")
     plt.ylabel("y")
