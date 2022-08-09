@@ -1,10 +1,12 @@
 # coding: utf-8
+# 2022.8.8
+# xy review
 import sys, os
 sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
 import pickle
 import numpy as np
 from collections import OrderedDict
-from common.layers import *
+from common_all.layers import *
 
 
 class DeepConvNet:
@@ -17,16 +19,17 @@ class DeepConvNet:
         affine - relu - dropout - affine - dropout - softmax
     """
     def __init__(self, input_dim=(1, 28, 28),
-                 conv_param_1 = {'filter_num':16, 'filter_size':3, 'pad':1, 'stride':1},
-                 conv_param_2 = {'filter_num':16, 'filter_size':3, 'pad':1, 'stride':1},
-                 conv_param_3 = {'filter_num':32, 'filter_size':3, 'pad':1, 'stride':1},
-                 conv_param_4 = {'filter_num':32, 'filter_size':3, 'pad':2, 'stride':1},
-                 conv_param_5 = {'filter_num':64, 'filter_size':3, 'pad':1, 'stride':1},
-                 conv_param_6 = {'filter_num':64, 'filter_size':3, 'pad':1, 'stride':1},
+                 conv_param_1={'filter_num':16, 'filter_size':3, 'pad':1, 'stride':1},
+                 conv_param_2={'filter_num':16, 'filter_size':3, 'pad':1, 'stride':1},
+                 conv_param_3={'filter_num':32, 'filter_size':3, 'pad':1, 'stride':1},
+                 conv_param_4={'filter_num':32, 'filter_size':3, 'pad':2, 'stride':1},
+                 conv_param_5={'filter_num':64, 'filter_size':3, 'pad':1, 'stride':1},
+                 conv_param_6={'filter_num':64, 'filter_size':3, 'pad':1, 'stride':1},
                  hidden_size=50, output_size=10):
         # 初始化权重===========
         # 各层的神经元平均与前一层的几个神经元有连接（TODO:自动计算）
         pre_node_nums = np.array([1*3*3, 16*3*3, 16*3*3, 32*3*3, 32*3*3, 64*3*3, 64*4*4, hidden_size])
+        # HE初始值
         wight_init_scales = np.sqrt(2.0 / pre_node_nums)  # 使用ReLU的情况下推荐的初始值
         
         self.params = {}
